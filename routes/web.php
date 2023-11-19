@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('blog',BlogController::class)
+    ->only(['index', 'store', 'edit', 'update','destroy'])
+    ->middleware(['auth','verified']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
